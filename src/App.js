@@ -2,11 +2,13 @@ import './App.css'
 import { useState, useEffect, useRef } from 'react'
 import Current from './components/Current.jsx'
 import Loader from './components/Loader.jsx'
+import Error from './components/Error.jsx'
 
 const api_token = "7d033a22cb9478229ceea33b92d1f9fd"
 
 function App() {
   const [loaded, setLoaded] = useState(false)
+  const [error, setError] = useState(false)
   const [city, setCity] = useState('Краснодар')
   const [weatherData, setWeatherData] = useState(null)
 
@@ -18,8 +20,10 @@ function App() {
         setWeatherData(data)
         setLoaded(true)
         console.log(data)
-      } catch (error) {
-        console.error("Ошибка при получении данных:", error)
+      } catch (err) {
+        setError(true)
+        setLoaded(true)
+        console.error(err)
       }
     };
     fetchWeatherData()
@@ -28,7 +32,13 @@ function App() {
   return (
     <div className="App">
       <Loader loaded={loaded}></Loader>
-      {weatherData !== null ? <Current city={city} weatherData={weatherData}></Current> : <></>}
+      <Error error={error}></Error>
+      {loaded && !error ? 
+        <div className='App-content'>
+          <Current city={city} weatherData={weatherData}></Current>
+        </div>
+        :
+        <></>}
     </div>
   );
 }
