@@ -1,6 +1,6 @@
 import './App.css'
-import { useState, useEffect, useRef } from 'react'
-import Current from './components/Current.jsx'
+import { useState, useEffect } from 'react'
+import AppContent from './components/AppContent.jsx'
 import Loader from './components/Loader.jsx'
 import Error from './components/Error.jsx'
 
@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${api_token}`)
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${api_token}`);
         const data = await response.json()
         setWeatherData(data)
         setLoaded(true)
@@ -25,20 +25,17 @@ function App() {
         setLoaded(true)
         console.error(err)
       }
-    };
+    }
     fetchWeatherData()
-  }, [city])
+    const intervalId = setInterval(fetchWeatherData, 60000)
+    return () => clearInterval(intervalId)
+  } , [city, api_token])
 
   return (
     <div className="App">
       <Loader loaded={loaded}></Loader>
       <Error error={error}></Error>
-      {loaded && !error ? 
-        <div className='App-content'>
-          <Current city={city} weatherData={weatherData}></Current>
-        </div>
-        :
-        <></>}
+      <AppContent error={error} loaded={loaded} weatherData={weatherData} city={city}></AppContent>
     </div>
   );
 }

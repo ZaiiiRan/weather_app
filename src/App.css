@@ -2,17 +2,3 @@ body {
     margin: 0;
     padding: 0;
 }
-
-.App-content {
-    width: 100vw;
-    height: 100vh;
-    background-image: url(./imgs/day.jpg);
-    backdrop-filter: blur(10px);
-    background-size: cover;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
