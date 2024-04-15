@@ -1,9 +1,13 @@
 .Current-block {
     height: 100vh;
     display: flex;
+    flex-direction: column;
+    gap: 100px;
     justify-content: center;
     align-items: center;
     scroll-snap-align: start;
+    color: #fff;
+    font-family: sans-serif;
 }
 .Current {
     padding: 30px;
@@ -14,8 +18,6 @@
     display: flex;
     gap: 20px;
     justify-content: space-between;
-    color: #fff;
-    font-family: sans-serif;
 }
 .Current-left {
     width: 40%;
@@ -45,6 +47,43 @@
     width: 80%;
     max-height: 80%;
 }
+.Current-hours {
+    width: 50vw;
+    height: 29vh;
+    padding: 30px;
+    border-radius: 25px;
+}
+.Current-hours-container {
+    width: 50vw;
+    height: 29vh;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 30px;
+    overflow-x: scroll;
+}
+.Current-hours-item {
+    min-width: 71px;
+    width: 10%;
+    height: 70%;
+    padding: 30px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.Current-hours-item__title {
+    font-size: 24px;
+}
+.Current-hours-item__img {
+    width: 90%;
+    height: auto;
+}
+.Current-hours-item__temp {
+    font-size: 20px;
+}
 
 @media (max-width: 2560px) and (min-width: 1921px) {
     .Current {
@@ -67,6 +106,34 @@
     }
     .wind {
         font-size: 24px;
+    }
+    ::-webkit-scrollbar {
+        height: 10px;
+    }
+    .Current-block {
+        gap: 100px;
+    }
+    .Current-hours {
+        width: 40vw;
+        max-height: 380px;
+        padding: 50px;
+    }
+    .Current-hours-container {
+        width: 40vw;
+        max-height: 380px;
+        padding-bottom: 10px;
+        gap: 50px;
+    }
+    .Current-hours-item {
+        min-width: 120px;
+        height: 70%;
+        padding: 30px;
+    }
+    .Current-hours-item__title {
+        font-size: 32px;
+    }
+    .Current-hours-item__temp {
+        font-size: 28px;
     }
 }
 @media (max-width: 3840px) and (min-width: 2561px) {
@@ -91,6 +158,34 @@
     .wind {
         font-size: 48px;
     }
+    ::-webkit-scrollbar {
+        height: 20px;
+    }
+    .Current-block {
+        gap: 200px;
+    }
+    .Current-hours {
+        width: 50vw;
+        max-height: 500px;
+        padding: 50px;
+    }
+    .Current-hours-container {
+        width: 50vw;
+        max-height: 500px;
+        padding-bottom: 20px;
+        gap: 75px;
+    }
+    .Current-hours-item {
+        min-width: 170px;
+        height: 70%;
+        padding: 30px;
+    }
+    .Current-hours-item__title {
+        font-size: 46px;
+    }
+    .Current-hours-item__temp {
+        font-size: 36px;
+    }
 }
 @media (max-width: 1600px) and (min-width: 1280px) {
     .Current {
@@ -109,6 +204,21 @@
     }
     .wind {
         font-size: 16px;
+    }
+    .Current-block {
+        gap: 90px;
+    }
+    .Current-hours {
+        width: 60vw;
+    }
+    .Current-hours-container {
+        width: 60vw;
+    }
+    .Current-hours-item__title {
+        font-size: 20px;
+    }
+    .Current-hours-item__temp {
+        font-size: 18px;
     }
 }
 @media (max-width: 1279px) and (min-width: 921px) {
@@ -129,6 +239,29 @@
     .wind {
         font-size: 16px;
     }
+    .Current-block {
+        gap: 60px;
+    }
+    .Current-hours {
+        width: 59vw;
+        height: 28vh;
+    }
+    .Current-hours-container {
+        width: 59vw;
+        height: 28vh;
+        gap: 30px;
+        padding-bottom: 15px;
+    }
+    .Current-hours-item {
+        min-width: 50px;
+        padding: 30px;
+    }
+    .Current-hours-item__title {
+        font-size: 20px;
+    }
+    .Current-hours-item__temp {
+        font-size: 18px;
+    }
 }
 @media (max-width: 920px) and (min-width: 768px) {
     .Current {
@@ -148,6 +281,29 @@
     .wind {
         font-size: 16px;
     }
+    .Current-block {
+        gap: 60px;
+    }
+    .Current-hours {
+        width: 60vw;
+        height: 27vh;
+    }
+    .Current-hours-container {
+        width: 60vw;
+        height: 27vh;
+        gap: 30px;
+        padding-bottom: 8px;
+    }
+    .Current-hours-item {
+        min-width: 55px;
+        padding: 20px;
+    }
+    .Current-hours-item__title {
+        font-size: 18px;
+    }
+    .Current-hours-item__temp {
+        font-size: 14px;
+    }
 }
 @media (max-width: 767px) and (min-width: 521px) {
     .Current {
@@ -165,6 +321,29 @@
         font-size: 14px;
     }
     .wind {
+        font-size: 12px;
+    }
+    .Current-block {
+        gap: 50px;
+    }
+    .Current-hours {
+        width: 60vw;
+        height: 27vh;
+    }
+    .Current-hours-container {
+        width: 60vw;
+        height: 27vh;
+        gap: 15px;
+        padding-bottom: 4px;
+    }
+    .Current-hours-item {
+        min-width: 40px;
+        padding: 20px;
+    }
+    .Current-hours-item__title {
+        font-size: 16px;
+    }
+    .Current-hours-item__temp {
         font-size: 12px;
     }
 }
@@ -186,6 +365,29 @@
     .wind {
         font-size: 12px;
     }
+    .Current-block {
+        gap: 40px;
+    }
+    .Current-hours {
+        width: 70vw;
+        height: 27vh;
+    }
+    .Current-hours-container {
+        width: 70vw;
+        height: 27vh;
+        gap: 8px;
+        padding-bottom: 4px;
+    }
+    .Current-hours-item {
+        min-width: 30px;
+        padding: 20px;
+    }
+    .Current-hours-item__title {
+        font-size: 14px;
+    }
+    .Current-hours-item__temp {
+        font-size: 12px;
+    }
 }
 @media (max-width: 319px) {
     .Current {
@@ -203,6 +405,29 @@
         font-size: 14px;
     }
     .wind {
+        font-size: 12px;
+    }
+    .Current-block {
+        gap: 30px;
+    }
+    .Current-hours {
+        width: 75vw;
+        height: 27vh;
+    }
+    .Current-hours-container {
+        width: 75vw;
+        height: 27vh;
+        gap: 4px;
+        padding-bottom: 4px;
+    }
+    .Current-hours-item {
+        min-width: 27px;
+        padding: 20px;
+    }
+    .Current-hours-item__title {
+        font-size: 14px;
+    }
+    .Current-hours-item__temp {
         font-size: 12px;
     }
 }

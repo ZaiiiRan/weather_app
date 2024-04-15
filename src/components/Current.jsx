@@ -1,50 +1,9 @@
 import './Current.css'
+import './getSkyImageSrc.js'
 import convertDegsToCompass from './convertDegsToCompass.js'
+import getSkyImageSrc from './getSkyImageSrc.js'
 
 export default function Current({city, weatherData, isDay}) {
-    let imgSrc
-    switch(weatherData.weather[0].description) {
-        case 'clear sky': {
-            if (isDay) imgSrc='./icons/Sunny.png'
-            else imgSrc='./icons/Moon.png'
-            break
-        }
-        case 'few clouds': {
-            if (isDay) imgSrc='./icons/Cloudy_Sunny.png'
-            else imgSrc='./icons/Cloudy_Moon.png'
-            break
-        }
-        case 'scattered clouds': {
-            imgSrc='./icons/Cloudy.png'
-            break
-        }
-        case 'broken clouds': {
-            imgSrc='./icons/Cloudy.png'
-            break
-        }
-        case 'shower rain': {
-            imgSrc='./icons/Shower.png'
-            break
-        }
-        case 'rain': {
-            imgSrc='./icons/Rain.png'
-            break
-        }
-        case 'thunderstorm': {
-            if (isDay) imgSrc='./icons/Lightning.png'
-            else imgSrc='./icons/Lightning_Moon.png'
-            break
-        }
-        case 'snow': {
-            imgSrc='./icons/Snow.png'
-            break
-        }
-        case 'mist': {
-            imgSrc='./icons/Foggy.png'
-            break
-        }
-    }
-
     return (
         <section  className='Current-block'>
             <div className="Current" style={{
@@ -63,7 +22,69 @@ export default function Current({city, weatherData, isDay}) {
                     </div>
                 </div>
                 <div className='Current-right'>
-                    <img src={imgSrc} alt="" draggable={false}/>
+                    <img src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" draggable={false}/>
+                </div>
+            </div>
+            <div className='Current-hours' style={{
+                backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+            }}>
+                <div className='Current-hours-container'>
+                    <div className='Current-hours-item'style={{
+                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+                    }}>
+                        <div className='Current-hours-item__title'>22:00</div>
+                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
+                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
+                    </div>
+                    <div className='Current-hours-item'style={{
+                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+                    }}>
+                        <div className='Current-hours-item__title'>23:00</div>
+                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
+                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
+                    </div>
+                    <div className='Current-hours-item'style={{
+                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+                    }}>
+                        <div className='Current-hours-item__title'>00:00</div>
+                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
+                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
+                    </div>
+                    <div className='Current-hours-item'style={{
+                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+                    }}>
+                        <div className='Current-hours-item__title'>01:00</div>
+                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
+                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
+                    </div>
+                    <div className='Current-hours-item'style={{
+                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+                    }}>
+                        <div className='Current-hours-item__title'>02:00</div>
+                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
+                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
+                    </div>
+                    <div className='Current-hours-item'style={{
+                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+                    }}>
+                        <div className='Current-hours-item__title'>03:00</div>
+                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
+                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
+                    </div>
+                    <div className='Current-hours-item'style={{
+                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+                    }}>
+                        <div className='Current-hours-item__title'>04:00</div>
+                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
+                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
+                    </div>
+                    <div className='Current-hours-item'style={{
+                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+                    }}>
+                        <div className='Current-hours-item__title'>05:00</div>
+                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
+                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
+                    </div>
                 </div>
             </div>
         </section>
