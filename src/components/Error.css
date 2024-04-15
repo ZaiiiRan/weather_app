@@ -22,7 +22,6 @@
     visibility: visible;
     opacity: 1;
 }
-
 .error-icon {
     display: block;
     width: 5vw;
@@ -36,10 +35,8 @@
     }
     .error-icon {
         width: 7vw;
-        height: auto;
     }
 }
-
 @media (max-width: 3840px) and (min-width: 2561px) {
     .Error {
         gap: 120px;
@@ -47,10 +44,8 @@
     }
     .error-icon {
         width: 9vw;
-        height: auto;
     }
 }
-
 @media (max-width: 1280px) and (min-width: 921px) {
     .Error {
         gap: 40px;
@@ -58,10 +53,8 @@
     }
     .error-icon {
         width: 12vw;
-        height: auto;
     }
 }
-
 @media (max-width: 920px) and (min-width: 761px) {
     .Error {
         gap: 30px;
@@ -69,10 +62,8 @@
     }
     .error-icon {
         width: 11vw;
-        height: auto;
     }
 }
-
 @media (max-width: 760px) and (min-width: 521px) {
     .Error {
         gap: 25px;
@@ -80,10 +71,8 @@
     }
     .error-icon {
         width: 9vw;
-        height: auto;
     }
 }
-
 @media (max-width: 520px) and (min-width: 361px) {
     .Error {
         gap: 35px;
@@ -91,10 +80,8 @@
     }
     .error-icon {
         width: 15vw;
-        height: auto;
     }
 }
-
 @media (max-width: 360px) {
     .Error {
         gap: 35px;
@@ -102,6 +89,5 @@
     }
     .error-icon {
         width: 20vw;
-        height: auto;
     }
 }
