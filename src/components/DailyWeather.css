@@ -1,0 +1,222 @@
+.DailyWeather-block {
+    color: #fff;
+    font-family: sans-serif;
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.DailyWeather {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px;
+}
+.DailyWeatherItem {
+    padding: 40px;
+    width: 22vw;
+    height: 28vh;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+}
+.DailyWeatherItem-title {
+    color: #fff;
+    font-size: 32px;
+    font-family: sans-serif;
+}
+.DailyWeatherItem-inner {
+    display: flex;
+    height: 90%;
+}
+.DailyWeather_icon {
+    width: 80%;
+    height: auto;
+}
+.DailyWeatherItem-Icon {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.DailyWeatherItem-content {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 34px;
+}
+.DailyWeather_wind {
+    font-size: 24px;
+}
+
+
+@media (max-width: 2560px) and (min-width: 1921px) {
+    .DailyWeather {
+        gap: 70px;
+    }
+    .DailyWeatherItem {
+        padding: 65px;
+    }
+    .DailyWeatherItem-title {
+        font-size: 48px;
+    }
+    .DailyWeatherItem-content {
+        font-size: 72px;
+    }
+    .pressure-text {
+        font-size: 56px;
+    }
+}
+@media (max-width: 3840px) and (min-width: 2561px) {
+    .DailyWeather {
+        gap: 90px;
+    }
+    .DailyWeatherItem {
+        padding: 100px;
+    }
+    .DailyWeatherItem-title {
+        font-size: 72px;
+    }
+    .DailyWeatherItem-content {
+        font-size: 90px;
+    }
+    .pressure-text {
+        font-size: 68px;
+    }
+}
+@media (max-width: 1600px) and (min-width: 1280px) {
+    .DailyWeather {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 40px;
+    }
+    .DailyWeatherItem {
+        padding: 30px;
+        width: 20vw;
+        height: 25vh;
+    }
+    .DailyWeatherItem-title {
+        font-size: 28px;
+    }
+    .DailyWeatherItem-content {
+        font-size: 24px;
+        gap: 16px;
+    }
+    .DailyWeather_wind {
+        font-size: 20px;
+    }
+}
+@media (max-width: 1279px) and (min-width: 921px) {
+    .DailyWeather {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 30px;
+    }
+    .DailyWeatherItem {
+        padding: 25px;
+        width: 23vw;
+        height: 21vh;
+    }
+    .DailyWeatherItem-title {
+        font-size: 24px;
+    }
+    .DailyWeatherItem-content {
+        font-size: 20px;
+        gap: 14px;
+    }
+    .DailyWeather_wind {
+        font-size: 16px;
+    }
+}
+@media (max-width: 920px) and (min-width: 768px) {
+    .DailyWeather {
+        grid-template-columns: 1fr 1fr;
+        gap: 27px;
+    }
+    .DailyWeatherItem {
+        padding: 23px;
+        width: 25vw;
+        height: 17vh;
+    }
+    .DailyWeatherItem-title {
+        font-size: 20px;
+    }
+    .DailyWeatherItem-content {
+        font-size: 18px;
+        gap: 10px;
+    }
+    .DailyWeather_wind {
+        font-size: 14px;
+    }
+}
+@media (max-width: 767px) and (min-width: 521px) {
+    .DailyWeather {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .DailyWeatherItem {
+        padding: 25px;
+        width: 32vw;
+        height: 15vh;
+    }
+    .DailyWeatherItem-title {
+        font-size: 16px;
+    }
+    .DailyWeatherItem-content {
+        font-size: 16px;
+        gap: 8px;
+    }
+    .DailyWeather_wind {
+        font-size: 12px;
+    }
+}
+@media (max-width: 520px) and (min-width: 320px) {
+    .DailyWeather {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .DailyWeatherItem {
+        padding: 15px;
+        width: 36vw;
+        height: 15vh;
+    }
+    .DailyWeatherItem-title {
+        font-size: 14px;
+    }
+    .DailyWeatherItem-content {
+        font-size: 13px;
+        gap: 8px;
+    }
+    .DailyWeather_wind {
+        font-size: 12px;
+    }
+}
+@media (max-width: 319px) {
+    .DailyWeather {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .DailyWeatherItem {
+        padding: 12px;
+        width: 50vw;
+        height: 11vh;
+    }
+    .DailyWeatherItem-title {
+        font-size: 12px;
+    }
+    .DailyWeather_icon {
+        width: 60%;
+    }
+    .DailyWeatherItem-content {
+        font-size: 12px;
+        gap: 8px;
+    }
+    .DailyWeather_wind {
+        font-size: 11px;
+    }
+}

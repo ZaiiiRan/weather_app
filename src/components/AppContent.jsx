@@ -3,6 +3,7 @@ import './App-content.css'
 import Current from './Current'
 import CurrentDetails from './CurrentDetails'
 import checkTime from './checkTime.js'
+import DailyWeather from './DailyWeayjer.jsx'
 
 export default function AppContent({loaded, error, weatherData, city}) {
     const [isDay, setIsDay] = useState(true)
@@ -26,6 +27,7 @@ export default function AppContent({loaded, error, weatherData, city}) {
                     <div className='Content'>
                         <Current city={city} weatherData={weatherData} isDay={isDay}></Current>
                         <CurrentDetails weatherData={weatherData} isDay={isDay}></CurrentDetails>
+                        <DailyWeather isDay={isDay}></DailyWeather>
                     </div>
                 </div>
                 :
