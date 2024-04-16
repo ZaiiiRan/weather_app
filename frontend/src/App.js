@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import AppContent from './components/AppContent.jsx'
 import Loader from './components/Loader.jsx'
 import Error from './components/Error.jsx'
+import ChangeLocation from './components/ChangeLocation.jsx'
 
 const api_token = "7d033a22cb9478229ceea33b92d1f9fd"
 
