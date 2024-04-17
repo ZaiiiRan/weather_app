@@ -48,6 +48,9 @@
     font-family: sans-serif;
     font-size: 56px;
 }
+.DetailsItem-content-wind {
+    font-size: 40px;
+}
 .pressure-text {
     font-size: 48px;
 }
@@ -65,6 +68,9 @@
     .DetailsItem-content {
         font-size: 72px;
     }
+    .DetailsItem-content-wind {
+        font-size: 50px;
+    }
     .pressure-text {
         font-size: 56px;
     }
@@ -81,6 +87,9 @@
     }
     .DetailsItem-content {
         font-size: 90px;
+    }
+    .DetailsItem-content-wind {
+        font-size: 60px;
     }
     .pressure-text {
         font-size: 68px;
@@ -102,6 +111,9 @@
     .DetailsItem-content {
         font-size: 40px;
     }
+    .DetailsItem-content-wind {
+        font-size: 30px;
+    }
     .pressure-text {
         font-size: 30px;
     }
@@ -121,6 +133,9 @@
     }
     .DetailsItem-content {
         font-size: 36px;
+    }
+    .DetailsItem-content-wind {
+        font-size: 22px;
     }
     .pressure-text {
         font-size: 28px;
@@ -142,6 +157,9 @@
     .DetailsItem-content {
         font-size: 30px;
     }
+    .DetailsItem-content-wind {
+        font-size: 18px;
+    }
     .pressure-text {
         font-size: 24px;
     }
@@ -161,6 +179,9 @@
     }
     .DetailsItem-content {
         font-size: 24px;
+    }
+    .DetailsItem-content-wind {
+        font-size: 15px;
     }
     .pressure-text {
         font-size: 20px;
@@ -182,6 +203,9 @@
     .DetailsItem-content {
         font-size: 16px;
     }
+    .DetailsItem-content-wind {
+        font-size: 10.3px;
+    }
     .pressure-text {
         font-size: 14px;
     }
@@ -191,21 +215,20 @@
         grid-template-columns: 1fr;
         gap: 10px;
     }
-    
     .DetailsItem {
         padding: 12px;
         width: 40vw;
         height: 11vh;
     }
-    
     .DetailsItem-title {
         font-size: 12px;
     }
-    
     .DetailsItem-content {
         font-size: 16px;
     }
-    
+    .DetailsItem-content-wind {
+        font-size: 12px;
+    }
     .pressure-text {
         font-size: 14px;
     }

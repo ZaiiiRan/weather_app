@@ -53,7 +53,7 @@
     font-size: 34px;
 }
 .DailyWeather_wind {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 
@@ -70,8 +70,8 @@
     .DailyWeatherItem-content {
         font-size: 72px;
     }
-    .pressure-text {
-        font-size: 56px;
+    .DailyWeather_wind {
+        font-size: 30px;
     }
 }
 @media (max-width: 3840px) and (min-width: 2561px) {
@@ -87,8 +87,8 @@
     .DailyWeatherItem-content {
         font-size: 90px;
     }
-    .pressure-text {
-        font-size: 68px;
+    .DailyWeather_wind {
+        font-size: 50px;
     }
 }
 @media (max-width: 1600px) and (min-width: 1280px) {
@@ -109,7 +109,7 @@
         gap: 16px;
     }
     .DailyWeather_wind {
-        font-size: 20px;
+        font-size: 19px;
     }
 }
 @media (max-width: 1279px) and (min-width: 921px) {
@@ -130,7 +130,7 @@
         gap: 14px;
     }
     .DailyWeather_wind {
-        font-size: 16px;
+        font-size: 14px;
     }
 }
 @media (max-width: 920px) and (min-width: 768px) {
@@ -151,7 +151,7 @@
         gap: 10px;
     }
     .DailyWeather_wind {
-        font-size: 14px;
+        font-size: 12px;
     }
 }
 @media (max-width: 767px) and (min-width: 521px) {
@@ -193,7 +193,7 @@
         gap: 8px;
     }
     .DailyWeather_wind {
-        font-size: 12px;
+        font-size: 11.5px;
     }
 }
 @media (max-width: 319px) {

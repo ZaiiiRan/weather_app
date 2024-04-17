@@ -1,90 +1,76 @@
 import './Current.css'
 import './getSkyImageSrc.js'
-import convertDegsToCompass from './convertDegsToCompass.js'
+import convertWindDir from './convertWindDir.js'
 import getSkyImageSrc from './getSkyImageSrc.js'
+import { useEffect, useState } from 'react'
 
-export default function Current({city, weatherData, isDay}) {
+function createPerHourWeather(weatherData) {
+    const arr = []
+    const now = new Date().getHours()
+    for (let i = now; i <= 23; i++) {
+        const time = i.toString().padStart(2, '0') + ':00'
+        const temp = Math.round(weatherData.forecast.forecastday[0].hour[i].temp_c)
+        const iconSrc = getSkyImageSrc(weatherData.forecast.forecastday[0].hour[i].condition.text, weatherData.forecast.forecastday[0].hour[i].is_day)
+        arr.push([time, temp, iconSrc])
+    }
+    let i = 0
+    while (arr.length !== 24) {
+        const time = i.toString().padStart(2, '0') + ':00'
+        const temp = Math.round(weatherData.forecast.forecastday[1].hour[i].temp_c)
+        const iconSrc = getSkyImageSrc(weatherData.forecast.forecastday[1].hour[i].condition.text, weatherData.forecast.forecastday[1].hour[i].is_day)
+        arr.push([time, temp, iconSrc])
+        i++
+    } 
+    return arr
+}
+
+export default function Current({city, weatherData}) {
+    const [hourForecast, setHourForecast] = useState(createPerHourWeather(weatherData))
+
+    useEffect(() => {
+        const newHourForecast = createPerHourWeather(weatherData)
+        setHourForecast(newHourForecast)
+        console.log(newHourForecast)
+    }, [weatherData])
+
     return (
         <section  className='Current-block'>
             <div className="Current" style={{
-                backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+                backgroundColor: (weatherData.current.is_day === 1) ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
             }}>
                 <div className='Current-left'>
                     <div className='city-text'>{city}</div>
                     <div className='temp' >
-                        {Math.round(weatherData.main.temp)}°C
+                        {Math.round(weatherData.current.temp_c)}°C
                     </div>
                     <div className='max-min-temp'>
-                        {Math.round(weatherData.main.temp_min)}°C / {Math.round(weatherData.main.temp_max)}°C
+                        {Math.round(weatherData.forecast.forecastday[0].day.mintemp_c)}°C / {Math.round(weatherData.forecast.forecastday[0].day.maxtemp_c)}°C
                     </div>
                     <div className='wind'>
-                        {convertDegsToCompass(weatherData.wind.deg)} &nbsp; &nbsp; &nbsp;{weatherData.wind.speed} м/c               
+                        {convertWindDir(weatherData.current.wind_dir)} &nbsp; &nbsp; &nbsp;{weatherData.current.wind_kph } км/ч               
                     </div>
                 </div>
                 <div className='Current-right'>
-                    <img src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" draggable={false}/>
+                    <img src={getSkyImageSrc(weatherData.current.condition.text, weatherData.current.is_day)} alt="weather-icon" draggable={false}/>
                 </div>
             </div>
             <div className='Current-hours' style={{
-                backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+                backgroundColor: (weatherData.current.is_day === 1) ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
             }}>
-                <div className='Current-hours-container'>
-                    <div className='Current-hours-item'style={{
-                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
-                    }}>
-                        <div className='Current-hours-item__title'>22:00</div>
-                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
-                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
-                    </div>
-                    <div className='Current-hours-item'style={{
-                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
-                    }}>
-                        <div className='Current-hours-item__title'>23:00</div>
-                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
-                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
-                    </div>
-                    <div className='Current-hours-item'style={{
-                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
-                    }}>
-                        <div className='Current-hours-item__title'>00:00</div>
-                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
-                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
-                    </div>
-                    <div className='Current-hours-item'style={{
-                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
-                    }}>
-                        <div className='Current-hours-item__title'>01:00</div>
-                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
-                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
-                    </div>
-                    <div className='Current-hours-item'style={{
-                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
-                    }}>
-                        <div className='Current-hours-item__title'>02:00</div>
-                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
-                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
-                    </div>
-                    <div className='Current-hours-item'style={{
-                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
-                    }}>
-                        <div className='Current-hours-item__title'>03:00</div>
-                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
-                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
-                    </div>
-                    <div className='Current-hours-item'style={{
-                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
-                    }}>
-                        <div className='Current-hours-item__title'>04:00</div>
-                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
-                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
-                    </div>
-                    <div className='Current-hours-item'style={{
-                        backgroundColor: isDay ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
-                    }}>
-                        <div className='Current-hours-item__title'>05:00</div>
-                        <img className='Current-hours-item__img' src={getSkyImageSrc(weatherData.weather[0].description, isDay)} alt="" />
-                        <div className='Current-hours-item__temp'>{Math.round(weatherData.main.temp)}°C</div>
-                    </div>
+                <div className='Current-hours-container' >
+                    {
+                        hourForecast.map((element) => {
+                            return (
+                                <div className='Current-hours-item' key={element[0]} style={{
+                                    backgroundColor: (weatherData.current.is_day === 1) ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
+                                }}>
+                                    <div className='Current-hours-item__title'>{element[0]}</div>
+                                    <img className='Current-hours-item__img' src={element[2]} alt="weather-icon" />
+                                    <div className='Current-hours-item__temp'>{element[1]}°C</div>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </div>
         </section>
