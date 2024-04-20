@@ -1,0 +1,131 @@
+.notFoundInput-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.notFoundInput {
+    width: 230px;
+    height: 30px;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1.5px #919191 solid;
+    outline: none;
+    font-size: 16px;
+    transition: border 0.3s ease;
+    font-family: sans-serif;
+}
+.notFoundInput:focus {
+    border: 1.5px #000000 solid;
+}
+.notFoundInput-button {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 15px;
+    font-family: sans-serif;
+    background-color: #ffa600;
+}
+.notFoundInput-button:active {
+    background-color: #ff7300;
+}
+@media (max-width: 2560px) and (min-width: 1921px) {
+    .notFoundInput {
+        width: 300px;
+        height: 30px;
+        padding: 20px;
+        font-size: 21px;
+        border: 2px #919191 solid;
+    }
+    .notFoundInput:focus {
+        border: 2px #000000 solid;
+    }
+}
+@media (max-width: 3840px) and (min-width: 2561px) {
+    .Error {
+        gap: 120px;
+        font-size: 56px;
+    }
+    .error-icon {
+        width: 9vw;
+    }
+    .notFoundInput {
+        width: 450px;
+        height: 60px;
+        padding: 20px;
+        font-size: 30px;
+        border: 4px #919191 solid;
+    }
+    .notFoundInput:focus {
+        border: 4px #000000 solid;
+    }
+}
+@media (max-width: 1280px) and (min-width: 921px) {
+    .notFoundInput {
+        width: 230px;
+        height: 30px;
+        padding: 10px;
+        font-size: 14px;
+    }
+    .notFoundInput-button {
+        width: 80px;
+        height: 30px;
+        display: flex;
+    }
+}
+@media (max-width: 920px) and (min-width: 761px) {
+    .notFoundInput {
+        width: 200px;
+        height: 20px;
+        padding: 10px;
+        font-size: 14px;
+    }
+    .notFoundInput-button {
+        width: 80px;
+        height: 30px;
+        display: flex;
+    }
+}
+@media (max-width: 760px) and (min-width: 521px) {
+    .notFoundInput {
+        width: 150px;
+        height: 18px;
+        padding: 10px;
+        font-size: 12px;
+    }
+    .notFoundInput-button {
+        width: 80px;
+        height: 30px;
+        display: flex;
+    }
+}
+@media (max-width: 520px) and (min-width: 361px) {
+    .notFoundInput {
+        width: 150px;
+        height: 18px;
+        padding: 10px;
+        font-size: 12px;
+    }
+    .notFoundInput-button {
+        width: 80px;
+        height: 30px;
+        display: flex;
+    }
+    
+}
+@media (max-width: 360px) {
+    .notFoundInput {
+        width: 130px;
+        height: 18px;
+        padding: 10px;
+        font-size: 10px;
+    }
+    .notFoundInput-button {
+        width: 50px;
+        height: 30px;
+        display: flex;
+        font-size: 10px;
+    }
+}

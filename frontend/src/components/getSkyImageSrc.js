@@ -56,6 +56,10 @@ export default function getSkyImageSrc(description, isDay = 1) {
             imgSrc='./icons/Rain.png'
             break
         }
+        case 'Moderate rain at times': {
+            imgSrc='./icons/Rain.png'
+            break
+        }
         case 'Light rain shower': {
             imgSrc='./icons/Rain.png'
             break
@@ -138,6 +142,11 @@ export default function getSkyImageSrc(description, isDay = 1) {
             break
         }
         case 'Thundery outbreaks possible': {
+            if (isDay === 1) imgSrc='./icons/Lightning.png'
+            else imgSrc='./icons/Lightning_Moon.png'
+            break
+        }
+        case 'Thundery outbreaks in nearby': {
             if (isDay === 1) imgSrc='./icons/Lightning.png'
             else imgSrc='./icons/Lightning_Moon.png'
             break
