@@ -27,6 +27,7 @@
 }
 .city-text {
     font-size: 36px;
+    text-wrap: nowrap;
 }
 .temp {
     font-size: 72px;
