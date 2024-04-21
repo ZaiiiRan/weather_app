@@ -5,7 +5,9 @@ import Loader from './components/Loader.jsx'
 import Error from './components/Error.jsx'
 import NotFound from './components/NotFound.jsx'
 
-const api_token = "785b5bfae56f4f1aa44195014241604"
+/*!!!!!!!!!!!!!!!!!!!!!*/
+const url = 'YOUR URL'
+/*!!!!!!!!!!!!!!!!!!!!*/
 
 function App() {
   const [loaded, setLoaded] = useState(false)
@@ -18,20 +20,20 @@ function App() {
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-        const responseForecast = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${api_token}&q=${city}}&days=4&aqi=no&alerts=no`)
-        if (!responseForecast.ok) setNotFound(true)
-        const data = await responseForecast.json()
-        const responseHistory1 = await fetch(`http://api.weatherapi.com/v1/history.json?key=${api_token}&q=${city}&dt=${(new Date(new Date().setDate(new Date().getDate() - 1))).toISOString().split('T')[0]}`)
-        if (!responseHistory1.ok) setNotFound(true)
-        const yesterday = await responseHistory1.json()
-        const responseHistory2 = await fetch(`http://api.weatherapi.com/v1/history.json?key=${api_token}&q=${city}&dt=${(new Date(new Date().setDate(new Date().getDate() - 2))).toISOString().split('T')[0]}`)
-        if (!responseHistory2.ok) setNotFound(true)
-        const beforeYesterday = await responseHistory2.json()
-        setWeatherData(data)
-        setHistoryWeather([yesterday, beforeYesterday])
-        setLoaded(true)
-        localStorage.setItem('weather_city', city)
-        console.log(data)
+        const response = await fetch(`${url}/weather/${city}`)
+        if (response.status === 400) {
+          setNotFound(true)
+          setLoaded(true)
+        } else if (response.status === 500) {
+          setError(true)
+          setLoaded(true)
+        } else {
+          const data = await response.json()
+          setWeatherData(data.forecast)
+          setHistoryWeather(data.history)
+          setLoaded(true)
+          localStorage.setItem('weather_city', city)
+        }
       } catch (err) {
         setError(true)
         setLoaded(true)
@@ -41,7 +43,7 @@ function App() {
     fetchWeatherData()
     const intervalId = setInterval(fetchWeatherData, 60000)
     return () => clearInterval(intervalId)
-  } , [city])
+  }, [city])
 
   useEffect(() => {
     setLoaded(false)
