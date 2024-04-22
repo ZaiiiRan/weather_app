@@ -30,7 +30,6 @@ export default function Current({city, weatherData}) {
     useEffect(() => {
         const newHourForecast = createPerHourWeather(weatherData)
         setHourForecast(newHourForecast)
-        console.log(newHourForecast)
     }, [weatherData])
 
     return (
@@ -65,7 +64,7 @@ export default function Current({city, weatherData}) {
                                     backgroundColor: (weatherData.current.is_day === 1) ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
                                 }}>
                                     <div className='Current-hours-item__title'>{element[0]}</div>
-                                    <img className='Current-hours-item__img' src={element[2]} alt="weather-icon" />
+                                    <img className='Current-hours-item__img' src={element[2]} alt="weather-icon" draggable={false} />
                                     <div className='Current-hours-item__temp'>{element[1]}°C</div>
                                 </div>
                             )

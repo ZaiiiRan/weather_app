@@ -1,7 +1,14 @@
 .notFoundInput-container {
+    min-width: 350px;
+    position: relative;
     display: flex;
     gap: 20px;
     align-items: center;
+}
+.notFoundInput-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 .notFoundInput {
     width: 230px;
@@ -18,20 +25,59 @@
     border: 1.5px #000000 solid;
 }
 .notFoundInput-button {
-    display: none;
+    user-select: none;
+    width: 70px;
+    height: 30px;
+    display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s ease;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     font-size: 14px;
     color: #fff;
     border-radius: 15px;
     font-family: sans-serif;
     background-color: #ffa600;
 }
+.notFoundInput-button:hover {
+    transform: scale(110%);
+}
 .notFoundInput-button:active {
     background-color: #ff7300;
 }
+.notFound_filter {
+    display: none;
+}
+.notFound_filter.show {
+    width: 250px;
+    background-color: #fff;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 15;
+    padding: 1.6px;
+    border: 1px #000 solid;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 16px;
+}
+.notFound_filter-item {
+    border-radius: 25px;
+    padding: 10px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+.notFound_filter-item:hover {
+    background-color: #b8b8b8;
+}
 @media (max-width: 2560px) and (min-width: 1921px) {
+    .notFoundInput-inputs {
+        gap: 6px;
+    }
     .notFoundInput {
         width: 300px;
         height: 30px;
@@ -42,14 +88,29 @@
     .notFoundInput:focus {
         border: 2px #000000 solid;
     }
+    .notFoundInput-button {
+        width: 120px;
+        height: 40px;
+        border-radius: 15px;
+        font-size: 18px;
+    }
+    .notFound_filter.show {
+        width: 340px;
+        border: 1px #000 solid;
+        gap: 15px;
+        font-size: 21px;
+    }
+    .notFound_filter-item {
+        border-radius: 25px;
+        padding: 15px;
+        background-color: #fff;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+    }
 }
 @media (max-width: 3840px) and (min-width: 2561px) {
-    .Error {
-        gap: 120px;
-        font-size: 56px;
-    }
-    .error-icon {
-        width: 9vw;
+    .notFoundInput-inputs {
+        gap: 15px;
     }
     .notFoundInput {
         width: 450px;
@@ -60,6 +121,21 @@
     }
     .notFoundInput:focus {
         border: 4px #000000 solid;
+    }
+    .notFoundInput-button {
+        width: 180px;
+        height: 50px;
+        border-radius: 15px;
+        font-size: 25px;
+    }
+    .notFound_filter.show {
+        width: 490px;
+        border: 3px #000 solid;
+        gap: 15px;
+        font-size: 30px;
+    }
+    .notFound_filter-item {
+        padding: 25px;
     }
 }
 @media (max-width: 1280px) and (min-width: 921px) {
@@ -72,10 +148,18 @@
     .notFoundInput-button {
         width: 80px;
         height: 30px;
-        display: flex;
+    }
+    .notFound_filter.show {
+        width: 250px;
+        padding: 1.8px;
+        gap: 10px;
+        font-size: 14px;
     }
 }
 @media (max-width: 920px) and (min-width: 761px) {
+    .notFoundInput-container {
+        min-width: 300px;
+    }
     .notFoundInput {
         width: 200px;
         height: 20px;
@@ -87,8 +171,17 @@
         height: 30px;
         display: flex;
     }
+    .notFound_filter.show {
+        width: 220px;
+        padding: 1.8px;
+        font-size: 14px;
+        gap: 5px;
+    }
 }
 @media (max-width: 760px) and (min-width: 521px) {
+    .notFoundInput-container {
+        min-width: 250px;
+    }
     .notFoundInput {
         width: 150px;
         height: 18px;
@@ -99,9 +192,18 @@
         width: 80px;
         height: 30px;
         display: flex;
+    }
+    .notFound_filter.show {
+        width: 170px;
+        padding: 1.8px;
+        font-size: 12px;
+        gap: 4px;
     }
 }
 @media (max-width: 520px) and (min-width: 361px) {
+    .notFoundInput-container {
+        min-width: 250px;
+    }
     .notFoundInput {
         width: 150px;
         height: 18px;
@@ -113,9 +215,17 @@
         height: 30px;
         display: flex;
     }
-    
+    .notFound_filter.show {
+        width: 170px;
+        padding: 1.8px;
+        font-size: 12px;
+        gap: 2px;
+    }
 }
 @media (max-width: 360px) {
+    .notFoundInput-container {
+        min-width: 200px;
+    }
     .notFoundInput {
         width: 130px;
         height: 18px;
@@ -127,5 +237,11 @@
         height: 30px;
         display: flex;
         font-size: 10px;
+    }
+    .notFound_filter.show {
+        width: 150px;
+        padding: 1.8px;
+        font-size: 12px;
+        gap: 1px;
     }
 }

@@ -5,9 +5,9 @@ import Loader from './components/Loader.jsx'
 import Error from './components/Error.jsx'
 import NotFound from './components/NotFound.jsx'
 
-/*!!!!!!!!!!!!!!!!!!!!!*/
-const url = 'YOUR URL'
-/*!!!!!!!!!!!!!!!!!!!!*/
+/*!!!!!!!!!-YOUR-URL-!!!!!!!!!!!!*/
+const url = 'http://192.168.1.64:3030'
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
 function App() {
   const [loaded, setLoaded] = useState(false)
