@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 function createPerHourWeather(weatherData) {
     const arr = []
-    const now = new Date().getHours()
+    const now = new Date(weatherData.location.localtime).getHours()
     for (let i = now; i <= 23; i++) {
         const time = i.toString().padStart(2, '0') + ':00'
         const temp = Math.round(weatherData.forecast.forecastday[0].hour[i].temp_c)

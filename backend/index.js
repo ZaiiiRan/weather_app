@@ -25,10 +25,10 @@ app.get('/weather/:city', async (req, res) => {
             return
         }
     
-        const historyResponse1 = await fetch(`http://api.weatherapi.com/v1/history.json?key=${api_token}&q=${city}&dt=${(new Date(new Date().setDate(new Date().getDate() - 1))).toISOString().split('T')[0]}`)
+        const historyResponse1 = await fetch(`http://api.weatherapi.com/v1/history.json?key=${api_token}&q=${city}&dt=${(new Date(new Date().setDate(new Date(forecastData.location.localtime).getDate() - 1))).toISOString().split('T')[0]}`)
         const historyData1 = await historyResponse1.json()
     
-        const historyResponse2 = await fetch(`http://api.weatherapi.com/v1/history.json?key=${api_token}&q=${city}&dt=${(new Date(new Date().setDate(new Date().getDate() - 2))).toISOString().split('T')[0]}`)
+        const historyResponse2 = await fetch(`http://api.weatherapi.com/v1/history.json?key=${api_token}&q=${city}&dt=${(new Date(new Date().setDate(new Date(forecastData.location.localtime).getDate() - 2))).toISOString().split('T')[0]}`)
         const historyData2 = await historyResponse2.json()
     
         res.json({ forecast: forecastData, history: [historyData1, historyData2] })

@@ -64,7 +64,38 @@
 .ChangeLocationInput-submit:active {
     transform: scale(110%);
 }
-
+.suggestions-container {
+    width: 190px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: rgba(65, 65, 65, 0.89);
+    color: #fff;
+    border-radius: 15px;
+    font-family: sans-serif;
+    font-size: 18px;
+}
+.suggestions-container.night {
+    background-color: rgba(34, 34, 34, 0.897)
+}
+.suggestion-item {
+    border-radius: 15px;
+    padding: 10px;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
+.suggestion-item:hover {
+    background-color: rgba(34, 34, 34, 0.829);
+}
+.suggestion-item:active {
+    background-color: rgb(51, 51, 51);
+}
+.suggestion-item.night:hover {
+    background-color: rgba(255, 255, 255, 0.253);
+}
+.suggestion-item.night:active {
+    background-color: rgba(255, 255, 255, 0.397);
+}
 @media (max-width: 2560px) and (min-width: 1921px) {
     .ChangeLocationButton {
         top: 30px;
@@ -93,6 +124,14 @@
         padding: 10px;
         border-radius: 10px;
         font-size: 22px;
+    }
+    .suggestions-container {
+        width: 220px;
+        gap: 7px;
+        font-size: 22px;
+    }
+    .suggestion-item {
+        padding: 15px;
     }
 }
 @media (max-width: 3840px) and (min-width: 2561px) {
@@ -123,6 +162,14 @@
         padding: 20px;
         border-radius: 10px;
         font-size: 32px;
+    }
+    .suggestions-container {
+        width: 340px;
+        gap: 15px;
+        font-size: 32px;
+    }
+    .suggestion-item {
+        padding: 20px;
     }
 }
 @media (max-width: 1280px) and (min-width: 921px) {
@@ -160,6 +207,11 @@
         border-radius: 15px;
         font-size: 11px;
     }
+    .suggestions-container {
+        width: 160px;
+        gap: 3px;
+        font-size: 16px;
+    }
 }
 @media (max-width: 920px) and (min-width: 761px) {
     .ChangeLocationButton {
@@ -195,6 +247,11 @@
         padding: 5px;
         border-radius: 15px;
         font-size: 11px;
+    }
+    .suggestions-container {
+        width: 130px;
+        gap: 3px;
+        font-size: 14px;
     }
 }
 @media (max-width: 760px) and (min-width: 521px) {
@@ -232,6 +289,11 @@
         border-radius: 15px;
         font-size: 11px;
     }
+    .suggestions-container {
+        width: 130px;
+        gap: 3px;
+        font-size: 12px;
+    }
 }
 @media (max-width: 520px) and (min-width: 361px) {
     .ChangeLocationButton {
@@ -268,6 +330,11 @@
         border-radius: 15px;
         font-size: 10px;
     }
+    .suggestions-container {
+        width: 104px;
+        gap: 3px;
+        font-size: 11px;
+    }
 }
 @media (max-width: 360px) {
     .ChangeLocationButton {
@@ -303,5 +370,10 @@
         padding: 5px;
         border-radius: 15px;
         font-size: 10px;
+    }
+    .suggestions-container {
+        width: 104px;
+        gap: 3px;
+        font-size: 11px;
     }
 }

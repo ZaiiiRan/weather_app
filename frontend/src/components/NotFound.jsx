@@ -24,6 +24,14 @@ export default function NotFound({notFound, setCity}) {
                                     if (i !== words.length - 1) city += '-'
                                 }
                             }
+                            else if (text.includes(' ')) {
+                                const words = text.split(' ')
+                                for (let i = 0; i < words.length; i++) {
+                                    words[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase()
+                                    city += words[i]
+                                    if (i !== words.length - 1) city += ' '
+                                }
+                            }
                             else city = text[0].toUpperCase() + text.slice(1, text.length).toLowerCase()
                             setCity(city)
                             setText('')
@@ -48,6 +56,14 @@ export default function NotFound({notFound, setCity}) {
                             if (i !== words.length - 1) city += '-'
                         }
                     }
+                    else if (text.includes(' ')) {
+                        const words = text.split(' ')
+                        for (let i = 0; i < words.length; i++) {
+                            words[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase()
+                            city += words[i]
+                            if (i !== words.length - 1) city += ' '
+                        }
+                    }
                     else city = text[0].toUpperCase() + text.slice(1, text.length).toLowerCase()
                     setCity(city)
                     setFindedCities([])
@@ -58,7 +74,6 @@ export default function NotFound({notFound, setCity}) {
                     {findedCities.map(item => {
                         return <div className='notFound_filter-item' key={item.city} onClick={() => {
                             setCity(item.city)
-                            setText('')
                             setFindedCities([])
                         }}>{item.city}</div>
                     })}
