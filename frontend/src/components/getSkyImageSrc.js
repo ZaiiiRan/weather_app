@@ -159,7 +159,7 @@ export default function getSkyImageSrc(description, isDay = 1) {
             imgSrc='./icons/Snow.png'
             break
         }
-        case 'Patchy ытщц nearby': {
+        case 'Patchy snow nearby': {
             imgSrc='./icons/Snow.png'
             break
         }
