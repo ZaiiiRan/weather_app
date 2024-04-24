@@ -4,6 +4,7 @@ import AppContent from './components/AppContent.jsx'
 import Loader from './components/Loader.jsx'
 import Error from './components/Error.jsx'
 import NotFound from './components/NotFound.jsx'
+import LoadImgs from './LoadImgs.js'
 
 /*!!!!!!!!!-YOUR-URL-!!!!!!!!!!!!*/
 const url = 'http://192.168.1.64:3030'
@@ -21,6 +22,7 @@ function App() {
     const fetchWeatherData = async () => {
       try {
         const response = await fetch(`${url}/weather/${city}`)
+        await LoadImgs()
         if (response.status === 400) {
           setNotFound(true)
           setLoaded(true)

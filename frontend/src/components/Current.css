@@ -432,3 +432,54 @@
         font-size: 12px;
     }
 }
+@media (max-width: 900px) and (min-width: 521px) and (orientation: landscape) {
+    .Current-block {
+        gap: 5px;
+    }
+    .Current {
+        width: 48vw;
+        min-height: 35vh;
+        gap: 10px;
+        padding: 18px;
+    }
+    .Current-left {
+        gap: 10px;
+    }
+    .Current-right img {
+        width: 60%;
+    }
+    .city-text {
+        font-size: 18px;
+    }
+    .temp {
+        font-size: 36px;
+    }
+    .max-min-temp {
+        font-size: 12px;
+    }
+    .wind {
+        font-size: 10px;
+    }
+    .Current-hours {
+        width: 60vw;
+        height: 28vh;
+        padding: 15px;
+    }
+    .Current-hours-container {
+        width: 60vw;
+        height: 27vh;
+        overflow-y: hidden;
+        gap: 15px;
+        padding-bottom: 4px;
+    }
+    .Current-hours-item {
+        min-width: 40px;
+        padding: 15px;
+    }
+    .Current-hours-item__title {
+        font-size: 16px;
+    }
+    .Current-hours-item__temp {
+        font-size: 12px;
+    }
+}

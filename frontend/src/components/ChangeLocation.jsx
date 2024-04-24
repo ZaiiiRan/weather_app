@@ -66,7 +66,7 @@ export default function ChangeLocation({setCity, isDay }) {
                 <input ref={inputRef} className='ChangeLocationInput' placeholder='Город' type="text" autoComplete='off' style={{
                     backgroundColor: (isDay) ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
                 }} disabled={!isHovered} onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
+                    if (event.key === 'Enter' && text !== '') {
                         let city = ''
                         if (text.includes('-')) {
                             const words = text.split('-')
@@ -91,9 +91,9 @@ export default function ChangeLocation({setCity, isDay }) {
                         setFindedCities([])
                     }
                 }} onChange={(event) => {
-                    setText(event.target.value)
-                    if (event.target.value !== '')
-                        fetch(`${url}/city/${event.target.value}`)
+                    setText(event.target.value.trim())
+                    if (event.target.value.trim() !== '')
+                        fetch(`${url}/city/${event.target.value.trim()}`)
                         .then(resp => resp.json())
                         .then(data => setFindedCities(data))
                     else setFindedCities([])
@@ -102,7 +102,8 @@ export default function ChangeLocation({setCity, isDay }) {
                 <div className='ChangeLocationInput-submit' style={{
                     backgroundColor: (isDay) ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)',
                 }} onClick={ () => {
-                    let city = ''
+                    if (text !== '') {
+                        let city = ''
                         if (text.includes('-')) {
                             const words = text.split('-')
                             for (let i = 0; i < words.length; i++) {
@@ -122,6 +123,7 @@ export default function ChangeLocation({setCity, isDay }) {
                         else city = text[0].toUpperCase() + text.slice(1, text.length).toLowerCase()
                         setCity(city)
                         setFindedCities([])
+                    }
                 }}>ОК</div>
             </div>
         </div>

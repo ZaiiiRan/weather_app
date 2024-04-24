@@ -14,7 +14,7 @@ export default function NotFound({notFound, setCity}) {
             <div className='notFoundInput-inputs'>
             <div className='notFoundInput-container'>
                 <input className='notFoundInput' type="text" placeholder='Введите название города' autoComplete='off' onKeyDown={(event) => {
-                        if (event.key === 'Enter') {
+                        if (event.key === 'Enter' && text !== '') {
                             let city = ''
                             if (text.includes('-')) {
                                 const words = text.split('-')
@@ -39,34 +39,36 @@ export default function NotFound({notFound, setCity}) {
                             setFindedCities([])
                         }
                 }} onChange={(event) => {
-                    setText(event.target.value)
-                    if (event.target.value !== '')
-                        fetch(`${url}/city/${event.target.value}`)
+                    setText(event.target.value.trim())
+                    if (event.target.value.trim() !== '')
+                        fetch(`${url}/city/${event.target.value.trim()}`)
                         .then(resp => resp.json())
                         .then(data => setFindedCities(data))
                     else setFindedCities([])
                 }} />
                 <div className='notFoundInput-button' onClick={() => {
-                    let city = ''
-                    if (text.includes('-')) {
-                        const words = text.split('-')
-                        for (let i = 0; i < words.length; i++) {
-                            words[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase()
-                            city += words[i]
-                            if (i !== words.length - 1) city += '-'
+                    if (text !== '') {
+                        let city = ''
+                        if (text.includes('-')) {
+                            const words = text.split('-')
+                            for (let i = 0; i < words.length; i++) {
+                                words[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase()
+                                city += words[i]
+                                if (i !== words.length - 1) city += '-'
+                            }
                         }
-                    }
-                    else if (text.includes(' ')) {
-                        const words = text.split(' ')
-                        for (let i = 0; i < words.length; i++) {
-                            words[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase()
-                            city += words[i]
-                            if (i !== words.length - 1) city += ' '
+                        else if (text.includes(' ')) {
+                            const words = text.split(' ')
+                            for (let i = 0; i < words.length; i++) {
+                                words[i] = words[i][0].toUpperCase() + words[i].slice(1, words[i].length).toLowerCase()
+                                city += words[i]
+                                if (i !== words.length - 1) city += ' '
+                            }
                         }
+                        else city = text[0].toUpperCase() + text.slice(1, text.length).toLowerCase()
+                        setCity(city)
+                        setFindedCities([])
                     }
-                    else city = text[0].toUpperCase() + text.slice(1, text.length).toLowerCase()
-                    setCity(city)
-                    setFindedCities([])
                 }}>Поиск</div>
             </div>
             <div className='notFoundInput-container'>

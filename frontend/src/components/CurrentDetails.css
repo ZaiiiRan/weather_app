@@ -233,3 +233,29 @@
         font-size: 14px;
     }
 }
+@media (max-width: 900px) and (min-width: 521px) and (orientation: landscape) {
+    .CurrentDetails {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    .DetailsItem {
+        padding: 20px;
+        width: 25vw;
+        height: 15vh;
+    }
+    .DetailsItem-title {
+        font-size: 16px;
+    }
+    .DetailsItem-content {
+        font-size: 24px;
+    }
+    .DetailsItem-content-wind {
+        font-size: 15px;
+    }
+    .pressure-text {
+        font-size: 20px;
+    }
+    .DetailsItem-Icon {
+        width: 25%;
+    }
+}
