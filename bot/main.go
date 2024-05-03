@@ -14,7 +14,7 @@ import (
 
 const (
 	telegramToken = "7094686954:AAEiCrOya70S-wJi6v5ZMfIdbaIwBfQTA80"
-	apiURL        = "http://192.168.1.64:3030"
+	apiURL        = "http://127.0.0.1:3030"
 )
 
 var selectedCities = make(map[int64]string)

@@ -6,10 +6,6 @@ import Error from './components/Error.jsx'
 import NotFound from './components/NotFound.jsx'
 import LoadImgs from './LoadImgs.js'
 
-/*!!!!!!!!!-YOUR-URL-!!!!!!!!!!!!*/
-const url = 'http://192.168.1.64:3030'
-/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-
 function App() {
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
@@ -21,7 +17,7 @@ function App() {
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-        const response = await fetch(`${url}/weather/${city}`)
+        const response = await fetch(`/weather/${city}`)
         await LoadImgs()
         if (response.status === 400) {
           setNotFound(true)

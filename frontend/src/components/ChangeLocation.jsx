@@ -1,8 +1,6 @@
 import './ChangeLocation.css'
 import { useState, useRef, useEffect } from 'react'
 
-const url = 'http://192.168.1.64:3030'
-
 export default function ChangeLocation({setCity, isDay }) {
     const [isHovered, setIsHovered] = useState(false)
     const [isExpanded, setIsExpanded] = useState(false)
@@ -93,7 +91,7 @@ export default function ChangeLocation({setCity, isDay }) {
                 }} onChange={(event) => {
                     setText(event.target.value.trim())
                     if (event.target.value.trim() !== '')
-                        fetch(`${url}/city/${event.target.value.trim()}`)
+                        fetch(`/city/${event.target.value.trim()}`)
                         .then(resp => resp.json())
                         .then(data => setFindedCities(data))
                     else setFindedCities([])

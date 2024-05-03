@@ -2,8 +2,6 @@ import { useState } from 'react'
 import './Error.css'
 import './NotFound.css'
 
-const url = 'http://192.168.1.64:3030'
-
 export default function NotFound({notFound, setCity}) {
     const [findedCities, setFindedCities] = useState([])
     const [text, setText] = useState('')
@@ -41,7 +39,7 @@ export default function NotFound({notFound, setCity}) {
                 }} onChange={(event) => {
                     setText(event.target.value.trim())
                     if (event.target.value.trim() !== '')
-                        fetch(`${url}/city/${event.target.value.trim()}`)
+                        fetch(`/city/${event.target.value.trim()}`)
                         .then(resp => resp.json())
                         .then(data => setFindedCities(data))
                     else setFindedCities([])
