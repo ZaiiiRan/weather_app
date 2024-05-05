@@ -2,6 +2,7 @@
 /backend/node_modules
 /backend/public
 /backend/ssl
+/backend/.env
 /frontend/.pnp
 /frontend/.pnp.js
 
@@ -18,3 +19,5 @@
 /frontend/npm-debug.log*
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
+
+/bot/.env

@@ -8,14 +8,13 @@ import (
 	"net/http"
 	"strings"
 	"time"
+	"os"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"github.com/joho/godotenv"
 )
 
-const (
-	telegramToken = "7094686954:AAEiCrOya70S-wJi6v5ZMfIdbaIwBfQTA80"
-	apiURL        = "http://127.0.0.1:3030"
-)
+const apiURL = "http://127.0.0.1:3030"
 
 var selectedCities = make(map[int64]string)
 var waitingForCity = make(map[int64]bool)
@@ -75,6 +74,13 @@ type WeatherResponse struct {
 }
 
 func main() {
+	err := godotenv.Load()
+	if err!= nil {
+		log.Fatalf("Ошибка загрузки .env файла: %s", err)
+	}
+
+	telegramToken := os.Getenv("TELEGRAM_TOKEN")
+
 	bot, err := tgbotapi.NewBotAPI(telegramToken)
 	if err != nil {
 		log.Panic(err)

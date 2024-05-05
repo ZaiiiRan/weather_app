@@ -4,11 +4,12 @@ const cors = require('cors')
 const port = 3030
 app.use(cors())
 const fs = require('fs')
+require('dotenv').config()
 
 const citiesData = JSON.parse(fs.readFileSync('./cities/cities.json', 'utf8'))
 
 /*!!!!!!!!-YOUR-API-TOKEN!!!!!!!!!!!!!*/
-const api_token = '785b5bfae56f4f1aa44195014241604'
+const api_token = `${process.env.WEATHER_API_TOKEN}`
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
 app.listen(port, () => {
