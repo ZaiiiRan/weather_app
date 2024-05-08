@@ -5,15 +5,25 @@ const port = 3030
 app.use(cors())
 const fs = require('fs')
 require('dotenv').config()
+const https = require('https')
+
+const options = {
+    key: fs.readFileSync(process.env.SSL_KEY_PATH),
+    cert: fs.readFileSync(process.env.SSL_CERT_PATH)
+}
+
 
 const citiesData = JSON.parse(fs.readFileSync('./cities/cities.json', 'utf8'))
 
-/*!!!!!!!!-YOUR-API-TOKEN!!!!!!!!!!!!!*/
 const api_token = `${process.env.WEATHER_API_TOKEN}`
-/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
-app.listen(port, () => {
+https.createServer(options, app).listen(port, () => {
     console.log(`Сервер запущен на порте ${port}`)
+})
+
+app.use(express.static(`${process.env.BUILD_FORLDER}`))
+app.get('/', async (req, res) => {
+    res.sendFile(`${process.env.BUILD_FORLDER}/index.html`, { root: __dirname })
 })
 
 app.get('/weather/:city', async (req, res) => {
