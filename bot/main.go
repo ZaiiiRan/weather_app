@@ -210,8 +210,14 @@ func main() {
 			default:
 				if waitingForCity[update.Message.Chat.ID] {
 					city := update.Message.Text
-					saveCity(update.Message.Chat.ID, city)
-					msg.Text = fmt.Sprintf("Город установлен: %s", city)
+					err := saveCity(update.Message.Chat.ID, city)
+					if err != nil {
+						log.Printf("Ошибка при сохранении города: %v", err)
+						msg.Text = "Произошла ошибка при установке города"
+					} else {
+						log.Printf("Город успешно установлен: %s", city)
+						msg.Text = fmt.Sprintf("Город установлен: %s", city)
+					}
 					waitingForCity[update.Message.Chat.ID] = false
 				} else {
 					msg.Text = "Я не знаю эту команду :("
@@ -532,7 +538,7 @@ func saveCity(chatID int64, city string) error {
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("статус код: %d", resp.StatusCode)
 	}
-
+	
 	return nil
 }
 

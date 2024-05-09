@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const port = 3030
 app.use(cors())
 const fs = require('fs')
 require('dotenv').config()
@@ -15,8 +14,8 @@ const httpsOptions = {
 }
 const api_token = `${process.env.WEATHER_API_TOKEN}`
 
-const httpPort = 3031
-const httpsPort = 3030
+const httpPort = 3031 //for http_api (bot)
+const httpsPort = 3030 //other
 
 const httpServer = http.createServer(app)
 const httpsServer = https.createServer(httpsOptions, app)
@@ -44,8 +43,12 @@ app.use(express.json())
 
 app.use(express.static(`${process.env.BUILD_FORLDER}`))
 app.get('/', async (req, res) => {
-    if (req.secure)
+    if (!req.secure) {
+        const host = req.get('host')
+        res.redirect(`https://${host}${req.originalUrl}`)
+    } else {
         res.sendFile(`${process.env.BUILD_FORLDER}/index.html`, { root: __dirname })
+    }
 })
 
 app.get('/weather/:city', async (req, res) => {
@@ -83,13 +86,13 @@ app.post('/saveCity', async (req, res) => {
         if (pass === process.env.BOT_PASSWORD) {
             const collection = await connectToDatabase()
             const result = await collection.updateOne({ chat_id: chat_id }, { $set: { city: city } }, { upsert: true })
-            res.status(200)
+            res.status(200).send("Город успешно сохранен")
         } else {
-            res.status(500)
+            res.status(500).send()
         }
     } catch (error) {
         console.error('Ошибка при сохранении города:', error)
-        res.status(500)
+        res.status(500).send()
     }
 })
 
@@ -102,13 +105,13 @@ app.post('/getCity', async (req, res) => {
             if (result) {
                 res.status(200).json({ city: result.city })
             } else {
-                res.status(404)
+                res.status(404).send()
             }
         } else {
-            res.status(500)
+            res.status(500).send()
         }
     } catch (error) {
         console.error('Ошибка при чтении города:', error)
-        res.status(500)
+        res.status(500).send()
     }
 })
