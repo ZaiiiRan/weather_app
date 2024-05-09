@@ -1,24 +1,27 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"log"
 	"math"
 	"net/http"
+	"os"
 	"strings"
 	"time"
-	"os"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/joho/godotenv"
 )
 
-const apiURL = "http://127.0.0.1:3030"
+const apiURL = "http://127.0.0.1:3031"
 
-var selectedCities = make(map[int64]string)
 var waitingForCity = make(map[int64]bool)
 
+type CityResponse struct {
+	City string `json:"city"`
+}
 type HourElement struct {
 	TempC     float64 `json:"temp_c"`
 	WindDir   string  `json:"wind_dir"`
@@ -75,7 +78,7 @@ type WeatherResponse struct {
 
 func main() {
 	err := godotenv.Load()
-	if err!= nil {
+	if err != nil {
 		log.Fatalf("Ошибка загрузки .env файла: %s", err)
 	}
 
@@ -137,25 +140,31 @@ func main() {
 				msg.Text = "Укажите город следующим сообщением"
 				waitingForCity[update.Message.Chat.ID] = true
 			case "current":
-				city := selectedCities[update.Message.Chat.ID]
-				if city == "" {
-					msg.Text = "Город не установлен. Используйте команду /setcity для установки"
-				} else {
-					msg.Text = getCurrentWeather(city)
+				city, err := getCity(update.Message.Chat.ID)
+				if err == nil {
+					if city == "" {
+						msg.Text = "Город не установлен. Используйте команду /setcity для установки"
+					} else {
+						msg.Text = getCurrentWeather(city)
+					}
 				}
 			case "hours":
-				city := selectedCities[update.Message.Chat.ID]
-				if city == "" {
-					msg.Text = "Город не установлен. Используйте команду /setcity для установки"
-				} else {
-					msg.Text = getHoursWeather(city)
+				city, err := getCity(update.Message.Chat.ID)
+				if err == nil {
+					if city == "" {
+						msg.Text = "Город не установлен. Используйте команду /setcity для установки"
+					} else {
+						msg.Text = getHoursWeather(city)
+					}
 				}
 			case "daily":
-				city := selectedCities[update.Message.Chat.ID]
-				if city == "" {
-					msg.Text = "Город не установлен. Используйте команду /setcity для установки"
-				} else {
-					msg.Text = getDailyWeather(city)
+				city, err := getCity(update.Message.Chat.ID)
+				if err == nil {
+					if city == "" {
+						msg.Text = "Город не установлен. Используйте команду /setcity для установки"
+					} else {
+						msg.Text = getDailyWeather(city)
+					}
 				}
 			case "help":
 				msg.Text = "Команды бота:\n\n/setcity <Город>\t\t\t - Установка города\n\n/current\t\t\t - Получение данных о текущей погоде в установленном городе\n\n/hours\t\t\t - Получение данных о погоде в установленном городе на следующие 24 часа\n\n/daily\t\t\t - Получение данных о погоде в установленном городе за несколько дней"
@@ -167,25 +176,31 @@ func main() {
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
 			switch update.Message.Text {
 			case "Текущая погода":
-				city := selectedCities[update.Message.Chat.ID]
-				if city == "" {
-					msg.Text = "Город не установлен. Используйте команду /setcity для установки"
-				} else {
-					msg.Text = getCurrentWeather(city)
+				city, err := getCity(update.Message.Chat.ID)
+				if err == nil {
+					if city == "" {
+						msg.Text = "Город не установлен. Используйте команду /setcity для установки"
+					} else {
+						msg.Text = getCurrentWeather(city)
+					}
 				}
 			case "Погода на 24 часа":
-				city := selectedCities[update.Message.Chat.ID]
-				if city == "" {
-					msg.Text = "Город не установлен. Используйте команду /setcity для установки"
-				} else {
-					msg.Text = getHoursWeather(city)
+				city, err := getCity(update.Message.Chat.ID)
+				if err == nil {
+					if city == "" {
+						msg.Text = "Город не установлен. Используйте команду /setcity для установки"
+					} else {
+						msg.Text = getHoursWeather(city)
+					}
 				}
 			case "Погода на несколько дней":
-				city := selectedCities[update.Message.Chat.ID]
-				if city == "" {
-					msg.Text = "Город не установлен. Используйте команду /setcity для установки"
-				} else {
-					msg.Text = getDailyWeather(city)
+				city, err := getCity(update.Message.Chat.ID)
+				if err == nil {
+					if city == "" {
+						msg.Text = "Город не установлен. Используйте команду /setcity для установки"
+					} else {
+						msg.Text = getDailyWeather(city)
+					}
 				}
 			case "Установить город":
 				msg.Text = "Укажите город следующим сообщением"
@@ -195,7 +210,7 @@ func main() {
 			default:
 				if waitingForCity[update.Message.Chat.ID] {
 					city := update.Message.Text
-					selectedCities[update.Message.Chat.ID] = city
+					saveCity(update.Message.Chat.ID, city)
 					msg.Text = fmt.Sprintf("Город установлен: %s", city)
 					waitingForCity[update.Message.Chat.ID] = false
 				} else {
@@ -498,4 +513,55 @@ func getSkyEmoji(condition string) string {
 		emoji = ""
 	}
 	return emoji
+}
+
+func saveCity(chatID int64, city string) error {
+	url := fmt.Sprintf("%s/saveCity", apiURL)
+	data := map[string]interface{}{"chat_id": chatID, "city": city, "pass": os.Getenv("BOT_PASSWORD")}
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+
+	resp, err := http.Post(url, "application/json", bytes.NewBuffer(jsonData))
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("статус код: %d", resp.StatusCode)
+	}
+
+	return nil
+}
+
+func getCity(chatID int64) (string, error) {
+	url := fmt.Sprintf("%s/getCity", apiURL)
+	data := map[string]interface{}{"chat_id": chatID, "pass": os.Getenv("BOT_PASSWORD")}
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		return "", fmt.Errorf("ошибка при кодировании данных: %s", err)
+	}
+
+	resp, err := http.Post(url, "application/json", bytes.NewBuffer(jsonData))
+	if err != nil {
+		return "", fmt.Errorf("ошибка при отправке запроса: %s", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusNotFound {
+		return "", fmt.Errorf("статус код: %d", resp.StatusCode)
+	}
+
+	if resp.StatusCode == http.StatusNotFound {
+		return "", nil
+	}
+
+	var cityResp CityResponse
+	if err := json.NewDecoder(resp.Body).Decode(&cityResp); err != nil {
+		return "", fmt.Errorf("ошибка при обработке ответа")
+	}
+
+	return cityResp.City, nil
 }
