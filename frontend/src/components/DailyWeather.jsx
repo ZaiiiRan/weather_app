@@ -70,18 +70,24 @@ export default function DailyWeather({weatherData, historyWeather}) {
                         </div>
                     </div>
                 </div>
-                <div className='DailyWeatherItem' style={{backgroundColor: (weatherData.current.is_day === 1) ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'}}>
-                    <div className='DailyWeatherItem-title'>{getDate(weatherData.forecast.forecastday[3].date)}</div>
-                    <div className='DailyWeatherItem-inner'>
-                        <div className='DailyWeatherItem-Icon'>
-                            <img className='DailyWeather_icon' src={getSkyImageSrc(weatherData.forecast.forecastday[3].day.condition.text)} alt="weather-icon" draggable={false} />
-                        </div>
-                        <div className='DailyWeatherItem-content'>
-                            <div>{Math.round(weatherData.forecast.forecastday[3].day.maxtemp_c)}°C / {Math.round(weatherData.forecast.forecastday[3].day.mintemp_c)}°C</div>
-                            <div className='DailyWeather_wind'>{convertWindDir(weatherData.forecast.forecastday[3].hour[12].wind_dir)} &nbsp; {weatherData.forecast.forecastday[3].hour[12].wind_kph} км/ч</div>
+                {
+                    weatherData.forecast.forecastday[3] 
+                    ? 
+                    <div className='DailyWeatherItem' style={{backgroundColor: (weatherData.current.is_day === 1) ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'}}>
+                        <div className='DailyWeatherItem-title'>{getDate(weatherData.forecast.forecastday[3].date)}</div>
+                        <div className='DailyWeatherItem-inner'>
+                            <div className='DailyWeatherItem-Icon'>
+                                <img className='DailyWeather_icon' src={getSkyImageSrc(weatherData.forecast.forecastday[3].day.condition.text)} alt="weather-icon" draggable={false} />
+                            </div>
+                            <div className='DailyWeatherItem-content'>
+                                <div>{Math.round(weatherData.forecast.forecastday[3].day.maxtemp_c)}°C / {Math.round(weatherData.forecast.forecastday[3].day.mintemp_c)}°C</div>
+                                <div className='DailyWeather_wind'>{convertWindDir(weatherData.forecast.forecastday[3].hour[12].wind_dir)} &nbsp; {weatherData.forecast.forecastday[3].hour[12].wind_kph} км/ч</div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    :
+                    <></>
+                }
             </div>
         </section>
     )

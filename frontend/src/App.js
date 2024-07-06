@@ -27,6 +27,7 @@ function App() {
           setLoaded(true)
         } else {
           const data = await response.json()
+          console.log(data)
           setWeatherData(data.forecast)
           setHistoryWeather(data.history)
           setLoaded(true)
@@ -54,7 +55,7 @@ function App() {
       <Loader loaded={loaded}></Loader>
       <NotFound notFound={notFound} setCity={setCity}></NotFound>
       <Error error={error}></Error>
-      <AppContent notFound={notFound} error={error} loaded={loaded} weatherData={weatherData} historyWeather={historyWeather} city={city} setCity={setCity}></AppContent>
+      <AppContent notFound={notFound} error={error} loaded={loaded} weatherData={weatherData} historyWeather={historyWeather} setCity={setCity}></AppContent>
     </div>
   );
 }

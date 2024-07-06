@@ -24,7 +24,7 @@ function createPerHourWeather(weatherData) {
     return arr
 }
 
-export default function Current({city, weatherData}) {
+export default function Current({weatherData}) {
     const [hourForecast, setHourForecast] = useState(createPerHourWeather(weatherData))
 
     useEffect(() => {
@@ -38,7 +38,7 @@ export default function Current({city, weatherData}) {
                 backgroundColor: (weatherData.current.is_day === 1) ? 'rgba(0, 0, 0, 0.178)' : 'rgba(255, 255, 255, 0.178)'
             }}>
                 <div className='Current-left'>
-                    <div className='city-text'>{city}</div>
+                    <div className='city-text'>{weatherData.location.name}</div>
                     <div className='temp' >
                         {Math.round(weatherData.current.temp_c)}°C
                     </div>

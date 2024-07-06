@@ -319,43 +319,77 @@ func getDailyWeather(city string) string {
 		return "Ошибка при обработке данных о погоде"
 	}
 
-	date1, _ := time.Parse("2006-01-02", weatherResp.Forecast.Forecast.Forecastday[2].Date)
-	date2, _ := time.Parse("2006-01-02", weatherResp.Forecast.Forecast.Forecastday[3].Date)
+	if len(weatherResp.Forecast.Forecast.Forecastday) > 3 {
+		date1, _ := time.Parse("2006-01-02", weatherResp.Forecast.Forecast.Forecastday[2].Date)
+		date2, _ := time.Parse("2006-01-02", weatherResp.Forecast.Forecast.Forecastday[3].Date)
 
-	return fmt.Sprintf("Город: %s\nПозавчера: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\nВчера: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\nСегодня: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\nЗавтра: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\n%s: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\n%s: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч",
-		city,
-		getSkyEmoji(weatherResp.History[1].Forecast.Forecastday[0].Day.Condition.Text),
-		int(math.Round(weatherResp.History[1].Forecast.Forecastday[0].Day.MaxTemp)),
-		int(math.Round(weatherResp.History[1].Forecast.Forecastday[0].Day.MinTemp)),
-		convertWindDir(weatherResp.History[1].Forecast.Forecastday[0].Hour[12].WindDir),
-		weatherResp.History[1].Forecast.Forecastday[0].Hour[12].WindKPH,
-		getSkyEmoji(weatherResp.History[0].Forecast.Forecastday[0].Day.Condition.Text),
-		int(math.Round(weatherResp.History[0].Forecast.Forecastday[0].Day.MaxTemp)),
-		int(math.Round(weatherResp.History[0].Forecast.Forecastday[0].Day.MinTemp)),
-		convertWindDir(weatherResp.History[0].Forecast.Forecastday[0].Hour[12].WindDir),
-		weatherResp.History[0].Forecast.Forecastday[0].Hour[12].WindKPH,
-		getSkyEmoji(weatherResp.Forecast.Forecast.Forecastday[0].Day.Condition.Text),
-		int(math.Round(weatherResp.Forecast.Forecast.Forecastday[0].Day.MaxTemp)),
-		int(math.Round(weatherResp.Forecast.Forecast.Forecastday[0].Day.MinTemp)),
-		convertWindDir(weatherResp.Forecast.Forecast.Forecastday[0].Hour[12].WindDir),
-		weatherResp.Forecast.Forecast.Forecastday[0].Hour[12].WindKPH,
-		getSkyEmoji(weatherResp.Forecast.Forecast.Forecastday[1].Day.Condition.Text),
-		int(math.Round(weatherResp.Forecast.Forecast.Forecastday[1].Day.MaxTemp)),
-		int(math.Round(weatherResp.Forecast.Forecast.Forecastday[1].Day.MinTemp)),
-		convertWindDir(weatherResp.Forecast.Forecast.Forecastday[1].Hour[12].WindDir),
-		weatherResp.Forecast.Forecast.Forecastday[1].Hour[12].WindKPH,
-		date1.Format("02.01"),
-		getSkyEmoji(weatherResp.Forecast.Forecast.Forecastday[2].Day.Condition.Text),
-		int(math.Round(weatherResp.Forecast.Forecast.Forecastday[2].Day.MaxTemp)),
-		int(math.Round(weatherResp.Forecast.Forecast.Forecastday[2].Day.MinTemp)),
-		convertWindDir(weatherResp.Forecast.Forecast.Forecastday[2].Hour[12].WindDir),
-		weatherResp.Forecast.Forecast.Forecastday[2].Hour[12].WindKPH,
-		date2.Format("02.01"),
-		getSkyEmoji(weatherResp.Forecast.Forecast.Forecastday[3].Day.Condition.Text),
-		int(math.Round(weatherResp.Forecast.Forecast.Forecastday[3].Day.MaxTemp)),
-		int(math.Round(weatherResp.Forecast.Forecast.Forecastday[3].Day.MinTemp)),
-		convertWindDir(weatherResp.Forecast.Forecast.Forecastday[3].Hour[12].WindDir),
-		weatherResp.Forecast.Forecast.Forecastday[3].Hour[12].WindKPH)
+		return fmt.Sprintf("Город: %s\nПозавчера: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\nВчера: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\nСегодня: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\nЗавтра: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\n%s: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\n%s: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч",
+			city,
+			getSkyEmoji(weatherResp.History[1].Forecast.Forecastday[0].Day.Condition.Text),
+			int(math.Round(weatherResp.History[1].Forecast.Forecastday[0].Day.MaxTemp)),
+			int(math.Round(weatherResp.History[1].Forecast.Forecastday[0].Day.MinTemp)),
+			convertWindDir(weatherResp.History[1].Forecast.Forecastday[0].Hour[12].WindDir),
+			weatherResp.History[1].Forecast.Forecastday[0].Hour[12].WindKPH,
+			getSkyEmoji(weatherResp.History[0].Forecast.Forecastday[0].Day.Condition.Text),
+			int(math.Round(weatherResp.History[0].Forecast.Forecastday[0].Day.MaxTemp)),
+			int(math.Round(weatherResp.History[0].Forecast.Forecastday[0].Day.MinTemp)),
+			convertWindDir(weatherResp.History[0].Forecast.Forecastday[0].Hour[12].WindDir),
+			weatherResp.History[0].Forecast.Forecastday[0].Hour[12].WindKPH,
+			getSkyEmoji(weatherResp.Forecast.Forecast.Forecastday[0].Day.Condition.Text),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[0].Day.MaxTemp)),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[0].Day.MinTemp)),
+			convertWindDir(weatherResp.Forecast.Forecast.Forecastday[0].Hour[12].WindDir),
+			weatherResp.Forecast.Forecast.Forecastday[0].Hour[12].WindKPH,
+			getSkyEmoji(weatherResp.Forecast.Forecast.Forecastday[1].Day.Condition.Text),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[1].Day.MaxTemp)),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[1].Day.MinTemp)),
+			convertWindDir(weatherResp.Forecast.Forecast.Forecastday[1].Hour[12].WindDir),
+			weatherResp.Forecast.Forecast.Forecastday[1].Hour[12].WindKPH,
+			date1.Format("02.01"),
+			getSkyEmoji(weatherResp.Forecast.Forecast.Forecastday[2].Day.Condition.Text),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[2].Day.MaxTemp)),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[2].Day.MinTemp)),
+			convertWindDir(weatherResp.Forecast.Forecast.Forecastday[2].Hour[12].WindDir),
+			weatherResp.Forecast.Forecast.Forecastday[2].Hour[12].WindKPH,
+			date2.Format("02.01"),
+			getSkyEmoji(weatherResp.Forecast.Forecast.Forecastday[3].Day.Condition.Text),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[3].Day.MaxTemp)),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[3].Day.MinTemp)),
+			convertWindDir(weatherResp.Forecast.Forecast.Forecastday[3].Hour[12].WindDir),
+			weatherResp.Forecast.Forecast.Forecastday[3].Hour[12].WindKPH)
+	} else {
+		date1, _ := time.Parse("2006-01-02", weatherResp.Forecast.Forecast.Forecastday[2].Date)
+
+		return fmt.Sprintf("Город: %s\nПозавчера: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\nВчера: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\nСегодня: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\nЗавтра: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч\n\n%s: %s\n\t\t\t🌡️ %d°C / %d°C\n\t\t\t💨 %s\t\t\t%.1f км/ч",
+			city,
+			getSkyEmoji(weatherResp.History[1].Forecast.Forecastday[0].Day.Condition.Text),
+			int(math.Round(weatherResp.History[1].Forecast.Forecastday[0].Day.MaxTemp)),
+			int(math.Round(weatherResp.History[1].Forecast.Forecastday[0].Day.MinTemp)),
+			convertWindDir(weatherResp.History[1].Forecast.Forecastday[0].Hour[12].WindDir),
+			weatherResp.History[1].Forecast.Forecastday[0].Hour[12].WindKPH,
+			getSkyEmoji(weatherResp.History[0].Forecast.Forecastday[0].Day.Condition.Text),
+			int(math.Round(weatherResp.History[0].Forecast.Forecastday[0].Day.MaxTemp)),
+			int(math.Round(weatherResp.History[0].Forecast.Forecastday[0].Day.MinTemp)),
+			convertWindDir(weatherResp.History[0].Forecast.Forecastday[0].Hour[12].WindDir),
+			weatherResp.History[0].Forecast.Forecastday[0].Hour[12].WindKPH,
+			getSkyEmoji(weatherResp.Forecast.Forecast.Forecastday[0].Day.Condition.Text),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[0].Day.MaxTemp)),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[0].Day.MinTemp)),
+			convertWindDir(weatherResp.Forecast.Forecast.Forecastday[0].Hour[12].WindDir),
+			weatherResp.Forecast.Forecast.Forecastday[0].Hour[12].WindKPH,
+			getSkyEmoji(weatherResp.Forecast.Forecast.Forecastday[1].Day.Condition.Text),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[1].Day.MaxTemp)),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[1].Day.MinTemp)),
+			convertWindDir(weatherResp.Forecast.Forecast.Forecastday[1].Hour[12].WindDir),
+			weatherResp.Forecast.Forecast.Forecastday[1].Hour[12].WindKPH,
+			date1.Format("02.01"),
+			getSkyEmoji(weatherResp.Forecast.Forecast.Forecastday[2].Day.Condition.Text),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[2].Day.MaxTemp)),
+			int(math.Round(weatherResp.Forecast.Forecast.Forecastday[2].Day.MinTemp)),
+			convertWindDir(weatherResp.Forecast.Forecast.Forecastday[2].Hour[12].WindDir),
+			weatherResp.Forecast.Forecast.Forecastday[2].Hour[12].WindKPH)
+	}
+
 }
 
 func convertWindDir(windDir string) string {
@@ -538,7 +572,7 @@ func saveCity(chatID int64, city string) error {
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("статус код: %d", resp.StatusCode)
 	}
-	
+
 	return nil
 }
 

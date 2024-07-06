@@ -4,7 +4,7 @@ import CurrentDetails from './CurrentDetails'
 import DailyWeather from './DailyWeather.jsx'
 import ChangeLocation from './ChangeLocation.jsx'
 
-export default function AppContent({loaded, notFound, error, weatherData, historyWeather, city, setCity}) {
+export default function AppContent({loaded, notFound, error, weatherData, historyWeather, setCity}) {
     return (
         <>
             {loaded && !error && !notFound ? 
@@ -13,7 +13,7 @@ export default function AppContent({loaded, notFound, error, weatherData, histor
                 }}>
                     <ChangeLocation isDay={weatherData.current.is_day === 1} setCity={setCity}></ChangeLocation>
                     <div className='Content'>
-                        <Current city={city} weatherData={weatherData}></Current>
+                        <Current weatherData={weatherData}></Current>
                         <CurrentDetails weatherData={weatherData}></CurrentDetails>
                         <DailyWeather weatherData={weatherData} historyWeather={historyWeather}></DailyWeather>
                     </div>
