@@ -556,7 +556,7 @@ func getSkyEmoji(condition string) string {
 }
 
 func saveCity(chatID int64, city string) error {
-	url := fmt.Sprintf("%s/saveCity", apiURL)
+	url := fmt.Sprintf("%s/bot/city/save", apiURL)
 	data := map[string]interface{}{"chat_id": chatID, "city": city, "pass": os.Getenv("BOT_PASSWORD")}
 	jsonData, err := json.Marshal(data)
 	if err != nil {
@@ -577,7 +577,7 @@ func saveCity(chatID int64, city string) error {
 }
 
 func getCity(chatID int64) (string, error) {
-	url := fmt.Sprintf("%s/getCity", apiURL)
+	url := fmt.Sprintf("%s/bot/city/get", apiURL)
 	data := map[string]interface{}{"chat_id": chatID, "pass": os.Getenv("BOT_PASSWORD")}
 	jsonData, err := json.Marshal(data)
 	if err != nil {
